@@ -40,3 +40,52 @@
                     </div>
                 </div>
             </section>
+
+<script>
+    let contactForm = document.getElementById('contactForm')
+    contactForm.addEventListener('submit',async (event) => {
+        event.preventDefault();
+
+        let name = document.getElementById('name').value;
+        let email = document.getElementById('email').value;
+        let phone = document.getElementById('phone').value;
+        let msg = document.getElementById('message').value;
+
+        //validation
+        if(name.length === 0)
+        {
+            alert('Name is required')
+        }
+        else if (email.length===0){
+            alert('Email is required')
+        }
+        else if(phone.length===0){
+            alert('Phone is required')
+        }
+        else{
+            //get data from contact form
+            let formData ={
+                fullName:name,
+                email:email,
+                phone:phone,
+                message:msg
+            }
+
+            // create post url
+            let url = "/contactRequest";
+
+           let result = await axios.post(url, formData);
+
+           if (result.status===200 && result.data===1){
+            alert('Your request has been submitted successfully')
+           }
+           else{
+            alert('Something went wrong')
+           }
+
+        }
+        
+
+    })
+
+</script>
