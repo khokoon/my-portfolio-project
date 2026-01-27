@@ -69,7 +69,19 @@
 
             let url= "/contactRequest";
 
-            let result = await axios.post(url, formData);
+            try {
+                 //Loader Show Content Hide
+            document.getElementById('loading-div').classList.remove('d-none');
+            document.getElementById('content-div').classList.add('d-none');
+
+            let result = await axios.post(url, formData); //AJAX Call
+
+             //Loader Hide Content Show
+            document.getElementById('loading-div').classList.add('d-none');
+            document.getElementById('content-div').classList.remove('d-none');          
+
+
+
             if(result.status===200 && result.data===1){
                 alert('Data submit successfully!')
                 contactForm.reset();
@@ -78,6 +90,12 @@
                 alert('Opps!! Something wrong! ')
             }
 
+                
+            } catch (error) {
+                alert(error)
+            }
+
+           
         }
 
     })
